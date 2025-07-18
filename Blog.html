@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickMed - Health Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #1abc9c;
+            --background-light: #f7f7f7;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --heading-color: #2c3e50;
+            --link-color: #3498db;
+            --border-radius: 10px;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--heading-color);
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-post-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-post-card img {
+            max-width: 100%;
+            height: 200px; /* Fixed height for consistent look */
+            object-fit: cover; /* Ensures image covers area without distortion */
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .blog-post-card h3 {
+            color: var(--heading-color);
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .blog-post-card .post-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .blog-post-card p {
+            font-size: 1em;
+            color: #555;
+            flex-grow: 1; /* Allows text to take available space */
+            margin-bottom: 20px;
+        }
+
+        .blog-post-card .read-more {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: flex-start; /* Align button to the left */
+        }
+
+        .blog-post-card .read-more:hover {
+            background-color: #16a085;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 2em;
+            }
+            h1 {
+                font-size: 2.2em;
+                margin-bottom: 30px;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .blog-post-card {
+                padding: 20px;
+            }
+            .blog-post-card h3 {
+                font-size: 1.5em;
+            }
+            .blog-post-card img {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ✅ Universal Navigation Bar for QuickMed -->
+<nav class="quickmed-navbar">
+  <div class="nav-logo">QuickMed</div>
+  <div class="nav-links">
+    <a href="Home.html">Home</a>
+    <a href="Book.html">Book</a>
+    <a href="Blog.html">Blog</a>
+    <a href="Reviews.html">Reviews</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <div class="dropdown">
+      <button>Account <i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="Login.html">Login</a>
+        <a href="SignIn.html">Sign Up</a>
+        <a href="changepw.html">Change Password</a>
+        <a href="#">Settings</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- ✅ Universal Styles -->
+<style>
+  .quickmed-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #2c3e50;
+    color: white;
+    flex-wrap: wrap;
+  }
+  .nav-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .nav-links a,
+  .nav-links button {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    text-decoration: none;
+  }
+  .nav-links a:hover,
+  .nav-links button:hover {
+    background-color: #1abc9c;
+    border-radius: 5px;
+  }
+  .dropdown {
+    position: relative;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+    z-index: 1000;
+  }
+  .dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+  }
+  .dropdown-content a:hover {
+    background-color: #f0f0f0;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .quickmed-footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 25px 10px 20px;
+    margin-top: 60px;
+    font-size: 0.95em;
+  }
+  @media (max-width: 600px) {
+    .quickmed-navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+    }
+    .nav-links a,
+    .nav-links button {
+      width: 100%;
+      text-align: left;
+      padding: 10px 0;
+    }
+    .dropdown-content {
+      right: auto;
+      left: 0;
+    }
+  }
+</style>
+
+<!-- ✅ Required Icon CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <header>QuickMed Health Blog</header>
+
+    <div class="container">
+        <h1>Stay Informed, Stay Healthy</h1>
+
+        <div class="blog-grid">
+            <div class="blog-post-card">
+                <img src="healthy.jpeg" alt="Healthy Eating">
+                <h3>The Power of Mindful Eating</h3>
+                <p class="post-meta">By QuickMed Team | June 28, 2024</p>
+                <p>Discover how mindful eating can transform your relationship with food and lead to better health and digestion...</p>
+                <a href="eating.html" class="read-more">Read More</a>
+            </div>
+
+            <div class="blog-post-card">
+                <img src="exercise.jpeg" alt="Exercise Benefits">
+                <h3>5 Exercises You Can Do Anywhere</h3>
+                <p class="post-meta">By Dr. Fitness | June 25, 2024</p>
+                <p>No gym? No problem! Learn five simple yet effective exercises you can incorporate into your daily routine...</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <div class="blog-post-card">
+                <img src="yoga.jpeg" alt="Mental Wellness">
+                <h3>Boosting Your Mental Health Daily</h3>
+                <p class="post-meta">By Wellness Coach | June 20, 2024</p>
+                <p>Explore practical tips and strategies to improve your mental well-being and reduce stress in your everyday life...</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <div class="blog-post-card">
+                <img src="sleep.webp" alt="Sleep Importance">
+                <h3>The Untapped Power of Quality Sleep</h3>
+                <p class="post-meta">By Health Expert | June 15, 2024</p>
+                <p>Unlock the secrets to better sleep and understand why it's crucial for your physical and mental health...</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <div class="blog-post-card">
+                <img src="drink.jpeg" alt="Hydration">
+                <h3>Why Hydration is More Than Just Water</h3>
+                <p class="post-meta">By Nutritionist | June 10, 2024</p>
+                <p>Delve deeper into the importance of proper hydration and how it affects every system in your body...</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <div class="blog-post-card">
+                <img src="prevent.jpeg" alt="Preventive Care">
+                <h3>Embracing Preventive Healthcare</h3>
+                <p class="post-meta">By QuickMed Team | June 5, 2024</p>
+                <p>Learn why taking proactive steps for your health can prevent illnesses and lead to a longer, healthier life...</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 QuickMed Health and Wellness. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuickMed - Change Password</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e8f1ff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quickmed-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #2c3e50;
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    .nav-logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      color: white;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 12px;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links button:hover {
+      background-color: #1abc9c;
+      border-radius: 5px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #fff;
+      min-width: 150px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f0f0f0;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .password-container {
+      background: rgba(255, 255, 255, 0.96);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 450px;
+      margin: 60px auto;
+      box-sizing: border-box;
+    }
+
+    .password-container h2 {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 2em;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+      font-size: 1em;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #1abc9c;
+      box-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 52%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+      font-size: 1.1em;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 14px;
+      background: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-group button:hover {
+      background-color: #1abc9c;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .password-container {
+        margin: 20px;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ✅ Navbar -->
+<nav class="quickmed-navbar">
+  <div class="nav-logo">QuickMed</div>
+  <div class="nav-links">
+    <a href="Home.html">Home</a>
+    <a href="Book.html">Book</a>
+    <a href="Blog.html">Blog</a>
+    <a href="Reviews.html">Reviews</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <div class="dropdown">
+      <button>Account <i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="Login.html">Login</a>
+        <a href="SignIn.html">Sign Up</a>
+        <a href="changepw.html">Change Password</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ✅ Change Password Box -->
+<div class="password-container">
+  <h2>Change Password</h2>
+  <form id="changePasswordForm">
+    <div class="form-group">
+      <label for="username">Email</label>
+      <input type="email" id="username" name="username" placeholder="Enter your email" required>
+      <span id="usernameError" class="error-message"></span>
+    </div>
+    <div class="form-group">
+      <label for="current-password">Current Password</label>
+      <input type="password" id="current-password" name="current-password" placeholder="Current password" required>
+      <span class="password-toggle" onclick="togglePasswordVisibility('current-password')">👁️</span>
+      <span id="currentPasswordError" class="error-message"></span>
+    </div>
+    <div class="form-group">
+      <label for="new-password">New Password</label>
+      <input type="password" id="new-password" name="new-password" placeholder="New password" required>
+      <span class="password-toggle" onclick="togglePasswordVisibility('new-password')">👁️</span>
+      <span id="newPasswordError" class="error-message"></span>
+    </div>
+    <div class="form-group">
+      <label for="confirm-password">Confirm New Password</label>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required>
+      <span class="password-toggle" onclick="togglePasswordVisibility('confirm-password')">👁️</span>
+      <span id="confirmPasswordError" class="error-message"></span>
+    </div>
+    <div class="form-group">
+      <button type="submit">Change Password</button>
+    </div>
+  </form>
+</div>
+
+<script>
+function togglePasswordVisibility(id) {
+  const input = document.getElementById(id);
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+</script>
+<script type="module" src="changepw.js"></script>
+</body>
+</html>

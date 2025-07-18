@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickMed - Reviews & Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #1abc9c;
+            --background-light: #f7f7f7;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --star-color: #FFD700; /* Gold for stars */
+            --border-radius: 10px;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+
+        .feedback-form-section, .reviews-display-section {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 40px;
+        }
+
+        .feedback-form-section h3, .reviews-display-section h3 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            direction: rtl; /* Stars from right to left */
+            margin-bottom: 20px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 2.5em;
+            color: #ccc;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: color 0.3s ease;
+        }
+
+        .rating label:hover,
+        .rating label:hover ~ label,
+        .rating input:checked ~ label {
+            color: var(--star-color);
+        }
+
+        button[type="submit"] {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #16a085;
+            transform: translateY(-2px);
+        }
+
+        .review-card {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .review-card .reviewer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .review-card .reviewer-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: var(--primary-color);
+        }
+
+        .review-card .review-stars {
+            color: var(--star-color);
+            font-size: 1.2em;
+        }
+
+        .review-card .review-comment {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .no-reviews {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .feedback-form-section, .reviews-display-section {
+                padding: 20px;
+            }
+            .feedback-form-section h3, .reviews-display-section h3 {
+                font-size: 1.5em;
+            }
+            .rating label {
+                font-size: 2em;
+            }
+            button[type="submit"] {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ✅ Universal Navigation Bar for QuickMed -->
+<nav class="quickmed-navbar">
+  <div class="nav-logo">QuickMed</div>
+  <div class="nav-links">
+    <a href="Home.html">Home</a>
+    <a href="Book.html">Book</a>
+    <a href="Blog.html">Blog</a>
+    <a href="Reviews.html">Reviews</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <div class="dropdown">
+      <button>Account <i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="Login.html">Login</a>
+        <a href="SignIn.html">Sign Up</a>
+        <a href="changepw.html">Change Password</a>
+        <a href="#">Settings</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- ✅ Universal Styles -->
+<style>
+  .quickmed-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #2c3e50;
+    color: white;
+    flex-wrap: wrap;
+  }
+  .nav-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .nav-links a,
+  .nav-links button {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    text-decoration: none;
+  }
+  .nav-links a:hover,
+  .nav-links button:hover {
+    background-color: #1abc9c;
+    border-radius: 5px;
+  }
+  .dropdown {
+    position: relative;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+    z-index: 1000;
+  }
+  .dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+  }
+  .dropdown-content a:hover {
+    background-color: #f0f0f0;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .quickmed-footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 25px 10px 20px;
+    margin-top: 60px;
+    font-size: 0.95em;
+  }
+  @media (max-width: 600px) {
+    .quickmed-navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+    }
+    .nav-links a,
+    .nav-links button {
+      width: 100%;
+      text-align: left;
+      padding: 10px 0;
+    }
+    .dropdown-content {
+      right: auto;
+      left: 0;
+    }
+  }
+</style>
+
+<!-- ✅ Required Icon CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <div class="container">
+        <h2>Share Your Experience with QuickMed!</h2>
+
+        <section class="feedback-form-section">
+            <h3>Leave a Review</h3>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="reviewerName">Your Name:</label>
+                    <input type="text" id="reviewerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="reviewerEmail">Your Email:</label>
+                    <input type="email" id="reviewerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Rating:</label>
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" required><label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reviewComment">Your Feedback:</label>
+                    <textarea id="reviewComment" placeholder="Tell us about your experience..." rows="5"></textarea>
+                </div>
+                <button type="submit">Submit Review</button>
+            </form>
+        </section>
+
+        <section class="reviews-display-section">
+            <h3>What Our Users Say</h3>
+            <div id="reviewsList">
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">Jane Doe</span>
+                        <span class="review-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </span>
+                    </div>
+                    <p class="review-comment">QuickMed has made booking appointments so easy! The staff are friendly and the service is excellent. Highly recommend!</p>
+                </div>
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">John Smith</span>
+                        <span class="review-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        </span>
+                    </div>
+                    <p class="review-comment">A reliable platform for health information and quick appointments. The blog posts are very informative.</p>
+                </div>
+            </div>
+            <p id="noReviewsMessage" class="no-reviews" style="display: none;">No reviews yet. Be the first to share your feedback!</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 QuickMed Health and Wellness. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reviewForm = document.getElementById('reviewForm');
+            const reviewsList = document.getElementById('reviewsList');
+            const noReviewsMessage = document.getElementById('noReviewsMessage');
+
+            // Function to render stars based on rating
+            function getStarHtml(rating) {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= rating) {
+                        stars += '<i class="fas fa-star"></i>';
+                    } else if (i - 0.5 === rating) {
+                        stars += '<i class="fas fa-star-half-alt"></i>';
+                    } else {
+                        stars += '<i class="far fa-star"></i>';
+                    }
+                }
+                return stars;
+            }
+
+            // Function to add a new review to the display
+            function addReviewToDisplay(name, rating, comment) {
+                const reviewCard = document.createElement('div');
+                reviewCard.classList.add('review-card');
+                reviewCard.innerHTML = `
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">${name}</span>
+                        <span class="review-stars">${getStarHtml(rating)}</span>
+                    </div>
+                    <p class="review-comment">${comment || 'No comment provided.'}</p>
+                `;
+                reviewsList.prepend(reviewCard); // Add new reviews to the top
+                noReviewsMessage.style.display = 'none'; // Hide "no reviews" message
+            }
+
+            // Handle form submission
+            reviewForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const reviewerName = document.getElementById('reviewerName').value.trim();
+                const reviewerEmail = document.getElementById('reviewerEmail').value.trim();
+                const selectedRating = document.querySelector('input[name="rating"]:checked');
+                const reviewComment = document.getElementById('reviewComment').value.trim();
+
+                if (!reviewerName || !reviewerEmail || !selectedRating) {
+                    alert('Please fill in your name, email, and select a rating.');
+                    return;
+                }
+
+                const ratingValue = parseInt(selectedRating.value);
+
+                addReviewToDisplay(reviewerName, ratingValue, reviewComment);
+
+                // Clear the form
+                reviewForm.reset();
+                // Optionally deselect stars (if not handled by reset())
+                document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
+            });
+
+            // Check if there are existing reviews to show/hide the message
+            if (reviewsList.children.length === 0) {
+                noReviewsMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

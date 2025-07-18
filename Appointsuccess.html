@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickMed - Appointment Successful</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gradient-start: #00c6ff;
+            --gradient-end: #0072ff;
+            --container-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #333;
+            --button-bg: #0072ff;
+            --button-hover: #005bb5;
+            --border-radius: 15px;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--white); /* This variable is not defined, will default */
+        }
+
+        .success-container {
+            text-align: center;
+            background: var(--container-bg);
+            color: var(--text-color);
+            padding: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            opacity: 0; /* Start hidden for animation */
+            transform: translateY(20px); /* Start slightly below for animation */
+            animation: fadeInScale 0.7s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--gradient-end);
+            font-weight: 600;
+        }
+
+        .success-container p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .success-container a {
+            display: inline-block;
+            padding: 14px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            background: var(--button-bg);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .success-container a:hover {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        .success-container a:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .success-container {
+                padding: 30px;
+                margin: 20px;
+            }
+            .success-container h1 {
+                font-size: 2rem;
+            }
+            .success-container p {
+                font-size: 1rem;
+            }
+            .success-container a {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <h1>Appointment Booked!</h1>
+        <p>Your appointment has been successfully scheduled. We look forward to seeing you!</p>
+        <a href="home.html">Go Back to Home</a>
+    </div>
+</body>
+</html>
